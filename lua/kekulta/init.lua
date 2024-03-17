@@ -8,6 +8,7 @@ local kekultagroup = augroup('kekulta', {})
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
 
+
 autocmd('TextYankPost', {
     group = yank_group,
     pattern = '*',
