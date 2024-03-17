@@ -36,19 +36,23 @@ autocmd('LspAttach', {
                 focusable = false,
             },
             update_in_insert = true, -- default to false
-            severity_sort = false,    -- default to false
+            severity_sort = false,   -- default to false
         })
 
-        vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-        vim.keymap.set("n", "<leader>dl", vim.diagnostic.setqflist)
+        vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, { desc = "Open diagnostic [F]loat" })
+        vim.keymap.set("n", "<leader>d[", vim.diagnostic.goto_prev, { desc = "Go to prev diagnostic issue" })
+        vim.keymap.set("n", "<leader>d]", vim.diagnostic.goto_next, { desc = "Go to next deagnostic issue" })
+        vim.keymap.set("n", "<leader>dl", vim.diagnostic.setqflist, { desc = "Open diagnostic [L]ist" })
 
-        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-        vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, opts)
-        vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-        vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+        vim.keymap.set("n", "<leader>cd", function() vim.lsp.buf.definition() end,
+            { buffer = e.buf, desc = "Go to [D]efinition" })
+        vim.keymap.set("n", "<leader>ch", function() vim.lsp.buf.hover() end, { buffer = e.buf, desc = "[H]over" })
+        vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end,
+            { buffer = e.buf, desc = "[C]ode [A]ctions" })
+        vim.keymap.set("n", "<leader>cr", function() vim.lsp.buf.references() end,
+            { buffer = e.buf, desc = "[R]eferences" })
+        vim.keymap.set("n", "<leader>cn", function() vim.lsp.buf.rename() end, { buffer = e.buf, desc = "Re[N]ame" })
+        vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end,
+            { buffer = e.buf, desc = "Signature [H]elp" })
     end
 })

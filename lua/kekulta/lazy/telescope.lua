@@ -3,12 +3,10 @@ return {
     config = function()
         local builtin = require("telescope.builtin")
 
-        vim.keymap.set("n", "<leader>tc", builtin.commands, {})
-
-        vim.keymap.set("n", "<leader>ts", builtin.lsp_document_symbols, {})
-        vim.keymap.set("n", "<leader>tf", builtin.find_files, {})
-        vim.keymap.set("n", "<leader><leader>", builtin.find_files, {})
-        vim.keymap.set("n", "<leater>tg", builtin.git_files, {})
+        vim.keymap.set("n", "<leader>ts", builtin.lsp_document_symbols, { desc = "Find LSP [S]ymbols" })
+        vim.keymap.set("n", "<leader>tf", builtin.find_files, { desc = "Find [F]iles" })
+        vim.keymap.set('n', '<leader>tg', builtin.live_grep, { desc = 'Search by [G]rep' })
+        vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "Shortcut to find files" })
 
         require("telescope").setup({
             defaults = require("telescope.themes").get_dropdown({

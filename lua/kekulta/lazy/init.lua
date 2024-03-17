@@ -12,7 +12,7 @@ return {
             require('leap').opts.safe_labels = {}
             vim.keymap.set('n', 'f', function()
                 require('leap').leap { target_windows = { vim.api.nvim_get_current_win() } }
-            end)
+            end, {desc = "Vim leap"})
         end
     }
 }

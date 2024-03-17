@@ -9,6 +9,7 @@ return {
                     vim.cmd("wa")
                     require("ranger-nvim").open(true)
                 end,
+                desc = "[Q]uit file to File Manager"
             })
         end,
     }

@@ -30,34 +30,30 @@ return {
 
         vim.keymap.set("n", "<leader>dp", function()
             dap.toggle_breakpoint()
-        end)
+        end, { desc = "Toggle break[P]oint" })
 
         vim.keymap.set("n", "<leader>dr", function()
             dap.repl.toggle()
-        end)
+        end, { desc = "Toggle [R]epl" })
 
         vim.keymap.set("n", "<leader>dc", function()
             dap.continue()
-        end)
+        end, { desc = "[C]ontinue" })
 
         vim.keymap.set("n", "<leader>ds", function()
             dap.step_over()
-        end)
+        end, { desc = "[S]tep over" })
 
         vim.keymap.set("n", "<leader>di", function()
             dap.step_into()
-        end)
+        end, { desc = "Step [I]nto" })
 
         vim.keymap.set("n", "<leader>do", function()
             dap.step_out()
-        end)
-
-        vim.keymap.set("n", "<leader>db", function()
-            dap.step_back()
-        end)
+        end, { desc = "Step [O]ut" })
 
         vim.keymap.set("n", "<leader>dt", function()
             dap.terminate()
-        end)
+        end, { desc = "[T]erminate" })
     end
 }
