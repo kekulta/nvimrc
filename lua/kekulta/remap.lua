@@ -9,10 +9,8 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat" })
 
 vim.keymap.set("n", "<C-s>", function()
     vim.cmd("wa")
-end)
+end, {desc = "[S]ave file"})
 
-vim.keymap.set("n", "<CR>", "o<Esc>")
-vim.keymap.set("n", "<S-CR>", "O<Esc>")
+vim.keymap.set({ "n", "v" }, "<S-L>", "$")
+vim.keymap.set({ "n", "v" }, "<S-H>", "^")
 
-vim.keymap.set("n", "<S-L>", "$")
-vim.keymap.set("n", "<S-H>", "^")

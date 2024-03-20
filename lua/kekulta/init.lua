@@ -39,19 +39,19 @@ autocmd('LspAttach', {
             severity_sort = false,   -- default to false
         })
 
-        vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, { desc = "Open diagnostic [F]loat" })
+        vim.keymap.set("n", "F", vim.diagnostic.open_float, { desc = "Open diagnostic [F]loat" })
         vim.keymap.set("n", "<leader>d[", vim.diagnostic.goto_prev, { desc = "Go to prev diagnostic issue" })
         vim.keymap.set("n", "<leader>d]", vim.diagnostic.goto_next, { desc = "Go to next deagnostic issue" })
         vim.keymap.set("n", "<leader>dl", vim.diagnostic.setqflist, { desc = "Open diagnostic [L]ist" })
 
-        vim.keymap.set("n", "<leader>cd", function() vim.lsp.buf.definition() end,
+        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end,
             { buffer = e.buf, desc = "Go to [D]efinition" })
-        vim.keymap.set("n", "<leader>ch", function() vim.lsp.buf.hover() end, { buffer = e.buf, desc = "[H]over" })
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, { buffer = e.buf, desc = "[H]over" })
         vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end,
             { buffer = e.buf, desc = "[C]ode [A]ctions" })
-        vim.keymap.set("n", "<leader>cr", function() vim.lsp.buf.references() end,
+        vim.keymap.set("n", "gr", function() require('telescope.builtin').lsp_references() end,
             { buffer = e.buf, desc = "[R]eferences" })
-        vim.keymap.set("n", "<leader>cn", function() vim.lsp.buf.rename() end, { buffer = e.buf, desc = "Re[N]ame" })
+        vim.keymap.set("n", "rn", function() vim.lsp.buf.rename() end, { buffer = e.buf, desc = "Re[N]ame" })
         vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end,
             { buffer = e.buf, desc = "Signature [H]elp" })
     end

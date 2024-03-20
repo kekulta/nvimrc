@@ -27,7 +27,6 @@ return {
             }
         }
 
-
         vim.keymap.set("n", "<leader>dp", function()
             dap.toggle_breakpoint()
         end, { desc = "Toggle break[P]oint" })
