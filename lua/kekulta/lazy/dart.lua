@@ -11,6 +11,9 @@ return {
         },
         config = function()
             require("flutter-tools").setup {
+                dart_define = {
+                    AMBEE_KEY = 'fwefewfw'
+                },
                 widget_guides = {
                     enabled = true,
                 },
@@ -23,9 +26,10 @@ return {
                     completeFunctionCalls = true,
                     renameFilesWithClasses = "prompt", -- "always"
                     enableSnippets = true,
-                    updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
+                    updateImportsOnRename = true,      -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
                 }
             }
+
         end
     }
 }

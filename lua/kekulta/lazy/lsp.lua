@@ -28,6 +28,7 @@ return {
             "saadparwaiz1/cmp_luasnip",
             "j-hui/fidget.nvim",
             "RobertBrunhage/dart-tools.nvim",
+            "akinsho/flutter-tools.nvim",
         },
 
         config = function()
@@ -59,6 +60,7 @@ return {
                     "bashls",
                     "jdtls",
                     "jsonls",
+                    "clangd",
                 },
                 handlers = {
                     ["lua_ls"] = function()
@@ -93,8 +95,12 @@ return {
                 capabilities = capabilities,
             })
 
+            lsp_config.clangd.setup({
+                capabilities = capabilities,
+            })
             -- Hot reload :)
             require("dart-tools")
+
 
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -163,7 +169,7 @@ return {
                         t("part '"), rep(1), t({ ".g.dart';", "", "@freezed", "" }),
                         t("class "), i(2, "ClassName"), t(" with _$"), rep(2), t({ " {", "" }), t("\tconst factory "),
                         rep(2), t({ "(", "\t\t{" }), i(3, "params"), t({ "}) = _" }), rep(2), t({ ";", "" }), t(
-                    "\tfactory "), rep(2), t(
+                        "\tfactory "), rep(2), t(
                         ".fromJson(Map<String, Object?> json) => _$"), rep(2), t({ "FromJson(json);", "" }), t({ "}" })
                     }
                 ),

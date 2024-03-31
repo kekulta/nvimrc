@@ -10,9 +10,9 @@ return {
             require("leap").labels = 'sfnjklhodweimbuyvrgtaqpcxzSFNJKLHODWEIMBUYVRGTAQPCXZ'
             require("leap").safe_labels = 'sfnutSFNLHMUGTZ'
             require('leap').opts.safe_labels = {}
-            vim.keymap.set('n', 'f', function()
-                require('leap').leap { target_windows = { vim.api.nvim_get_current_win() } }
-            end, {desc = "Vim leap"})
+            -- vim.keymap.set('n', 'F', function()
+            --     require('leap').leap { target_windows = { vim.api.nvim_get_current_win() } }
+            -- end, { desc = "Vim leap" })
         end
     }
 }

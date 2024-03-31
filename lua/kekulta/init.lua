@@ -39,7 +39,7 @@ autocmd('LspAttach', {
             severity_sort = false,   -- default to false
         })
 
-        vim.keymap.set("n", "F", vim.diagnostic.open_float, { desc = "Open diagnostic [F]loat" })
+        vim.keymap.set("n", "<leader>df", vim.diagnostic.open_float, { desc = "Open diagnostic [F]loat" })
         vim.keymap.set("n", "<leader>d[", vim.diagnostic.goto_prev, { desc = "Go to prev diagnostic issue" })
         vim.keymap.set("n", "<leader>d]", vim.diagnostic.goto_next, { desc = "Go to next deagnostic issue" })
         vim.keymap.set("n", "<leader>dl", vim.diagnostic.setqflist, { desc = "Open diagnostic [L]ist" })
