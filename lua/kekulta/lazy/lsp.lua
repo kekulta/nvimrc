@@ -29,29 +29,25 @@ return {
             "j-hui/fidget.nvim",
             "RobertBrunhage/dart-tools.nvim",
             "akinsho/flutter-tools.nvim",
+            "udalov/kotlin-vim",
         },
 
         config = function()
             local cmp = require('cmp')
             local cmp_lsp = require("cmp_nvim_lsp")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
             local capabilities_lua = vim.tbl_deep_extend(
                 "force",
                 {},
                 vim.lsp.protocol.make_client_capabilities(),
                 cmp_lsp.default_capabilities())
 
-            local dartExcludedFolders = {
-                vim.fn.expand("$HOME/AppData/Local/Pub/Cache"),
-                vim.fn.expand("$HOME/.pub-cache"),
-                vim.fn.expand("/opt/homebrew/"),
-                vim.fn.expand("$HOME/tools/flutter/"),
-            }
-
             require("fidget").setup({})
             require("mason").setup({
                 PATH = "prepend"
             })
+            local lsp_config = require("lspconfig")
 
             require("mason-lspconfig").setup({
                 ensure_installed = {
@@ -61,11 +57,11 @@ return {
                     "jdtls",
                     "jsonls",
                     "clangd",
+                    "kotlin_language_server",
                 },
                 handlers = {
                     ["lua_ls"] = function()
-                        local lspconfig = require("lspconfig")
-                        lspconfig.lua_ls.setup {
+                        lsp_config.lua_ls.setup {
                             capabilities = capabilities_lua,
                             settings = {
                                 Lua = {
@@ -77,31 +73,32 @@ return {
                         }
                     end,
 
+                    ["kotlin_language_server"] = function()
+                        lsp_config.kotlin_language_server.setup {
+                            capabilities = capabilities,
+                            -- root_dir = lsp_config.util.root_pattern(''),
+                            on_attach = function()
+                                print("Attach KLS")
+                            end,
+                        }
+                    end,
+
+                    function(server_name)
+                        lsp_config[server_name].setup {
+                            capabilities = capabilities,
+                            on_attach = function()
+                                print("Attach LSP: " .. server_name)
+                            end,
+                        }
+                    end,
                 }
             })
 
 
-            local lsp_config = require("lspconfig")
-            local ls = require("luasnip")
-
-            lsp_config.bashls.setup({
-                capabilities = capabilities,
-            })
-
-            lsp_config.jsonls.setup({
-                capabilities = capabilities,
-            })
-            lsp_config.jdtls.setup({
-                capabilities = capabilities,
-            })
-
-            lsp_config.clangd.setup({
-                capabilities = capabilities,
-            })
             -- Hot reload :)
             require("dart-tools")
 
-
+            local ls = require("luasnip")
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
             cmp.setup({
@@ -139,26 +136,10 @@ return {
                 })
             })
 
-            local date = function() return { os.date('%Y-%m-%d') } end
             local s = ls.snippet
-            local sn = ls.snippet_node
             local t = ls.text_node
             local i = ls.insert_node
-            local f = ls.function_node
-            local c = ls.choice_node
-            local d = ls.dynamic_node
-            local r = ls.restore_node
-            local l = require("luasnip.extras").lambda
             local rep = require("luasnip.extras").rep
-            local p = require("luasnip.extras").partial
-            local m = require("luasnip.extras").match
-            local n = require("luasnip.extras").nonempty
-            local dl = require("luasnip.extras").dynamic_lambda
-            local fmt = require("luasnip.extras.fmt").fmt
-            local fmta = require("luasnip.extras.fmt").fmta
-            local types = require("luasnip.util.types")
-            local conds = require("luasnip.extras.conditions")
-            local conds_expand = require("luasnip.extras.conditions.expand")
 
             ls.add_snippets("dart", {
                 s("frzd",

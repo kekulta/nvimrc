@@ -1,9 +1,29 @@
 return {
+    -- { "rose-pine/neovim",
+    --     name = "rose-pine",
+    --     config = function()
+    --         vim.cmd("colorscheme rose-pine")
+    --     end
+    -- },
     {
-        "rose-pine/neovim",
-        name = "rose-pine",
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
         config = function()
-            vim.cmd("colorscheme rose-pine")
+            require("catppuccin").setup({
+                integrations = {
+                    cmp = true,
+                    gitsigns = true,
+                    nvimtree = true,
+                    treesitter = true,
+                    notify = false,
+                    which_key = true,
+                    mini = {
+                        enabled = true,
+                    },
+                }
+            })
+            vim.cmd.colorscheme "catppuccin-macchiato"
         end
     },
     {

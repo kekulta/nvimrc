@@ -19,3 +19,4 @@ vim.keymap.set({ "n", }, "<C-,>", ":vert res -2<CR>")
 vim.keymap.set({ "n", }, "<C-=>", ":res +2<CR>")
 vim.keymap.set({ "n", }, "<C-->", ":res -2<CR>")
 vim.keymap.set({ "n", }, "T", "<C-w>t")
+
