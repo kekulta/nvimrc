@@ -20,6 +20,8 @@ vim.keymap.set({ "n", }, "<C-=>", ":res +2<CR>")
 vim.keymap.set({ "n", }, "<C-->", ":res -2<CR>")
 vim.keymap.set({ "n", }, "T", "<C-w>t")
 
+vim.keymap.set({ "t", }, "<Esc>", "<C-\\><C-n>")
+
 vim.api.nvim_create_user_command('Wq', 'wq', {})
 vim.api.nvim_create_user_command('WQ', 'wq', {})
 vim.api.nvim_create_user_command('W', 'w', {})
