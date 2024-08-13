@@ -83,6 +83,15 @@ return {
                         }
                     end,
 
+                    ["clangd"] = function()
+                        lsp_config["clangd"].setup {
+                            capabilities = capabilities,
+                            on_attach = function()
+                                print("Attach clangd")
+                            end,
+                        }
+                    end,
+
                     function(server_name)
                         lsp_config[server_name].setup {
                             capabilities = capabilities,

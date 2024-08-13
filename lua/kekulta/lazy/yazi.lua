@@ -1,37 +1,21 @@
 return {
     {
-        "SR-MyStar/yazi.nvim",
-        name = "yazi",
-        opts = {
-            -- ...
+        'mikavilpas/yazi.nvim',
+        event = 'VeryLazy',
+        keys = {
+            {
+                "<leader>q",
+                "<cmd>Yazi<cr>",
+                desc = "Open yazi at the current file",
+            },
+            {
+                "<leader>cw",
+                "<cmd>Yazi cwd<cr>",
+                desc = "Open the file manager in nvim's working directory",
+            },
         },
-        config = function()
-            vim.api.nvim_set_keymap("n", "<leader>q", "", {
-                noremap = true,
-                callback = function()
-                    vim.cmd("wa")
-                    require("yazi").open()
-                end,
-                desc = "Open file explorer",
-            })
-        end
+        opts = {
+            open_for_directories = true,
+        }
     },
-    -- {
-    --     "kelly-lin/ranger.nvim",
-    --     config = function()
-    --         require("ranger-nvim").setup({
-    --             replace_netrw = true,
-    --             ui = {
-    --                 height = 0.95,
-    --             }
-    --         })
-    --         vim.api.nvim_set_keymap("n", "<leader>q", "", {
-    --             noremap = true,
-    --             callback = function()
-    --                 vim.cmd("wa")
-    --                 require("ranger-nvim").open(true)
-    --             end,
-    --         })
-    --     end,
-    -- }
 }

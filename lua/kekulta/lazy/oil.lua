@@ -4,6 +4,8 @@ return {
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-        require("oil").setup()
+        require("oil").setup({
+            default_file_explorer = false,
+        })
     end
 }
