@@ -16,7 +16,7 @@ autocmd('FileType', {
     group = c_group,
     callback = function()
         vim.keymap.set("n", "gh", ":ClangdSwitchSourceHeader<CR>",
-            { desc = "Flutter tools", silent = true, buffer = true })
+            { desc = "Switch header/source", silent = true, buffer = true })
     end,
 })
 

@@ -48,6 +48,10 @@ return {
                 },
                 find_files = {
                     initial_mode = "insert",
+                    hidden = "true",
+                    file_ignore_patterns = {
+                        ".git", "build", "%.lock"
+                    },
                 },
                 buffers = {
                     show_all_buffers = true,

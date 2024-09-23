@@ -21,6 +21,8 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+vim.opt.conceallevel = 1
+
 vim.g.c_syntax_for_h = 1
 
 vim.g.VM_maps = {

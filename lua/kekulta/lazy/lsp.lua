@@ -57,7 +57,7 @@ return {
                     "jdtls",
                     "jsonls",
                     "clangd",
-                    "kotlin_language_server",
+                    -- "kotlin_language_server",
                 },
                 handlers = {
                     ["lua_ls"] = function()
