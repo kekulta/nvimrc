@@ -14,8 +14,27 @@ require("lazy").setup({
     change_detection = { notify = false }
 })
 
-require("oil").setup()
+require("oil").setup({
+    columns = { "icon", "permissions", "size", "mtime" },
+    constrain_cursor = "name",
+})
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
 vim.cmd.colorscheme("catppuccin-macchiato")
+
+local yank_group = vim.api.nvim_create_augroup('HighlightYank', {})
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+    group = yank_group,
+    pattern = '*',
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = 'IncSearch',
+            timeout = 40,
+        })
+    end,
+})
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
