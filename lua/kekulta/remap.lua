@@ -21,6 +21,9 @@ vim.keymap.set({ "t", }, "<Esc>", "<C-\\><C-n>")
 vim.api.nvim_create_user_command('Root', 'ProjectRoot', {})
 vim.api.nvim_create_user_command('Par', "exec 'cd' . expand('%:p:h')", {})
 
+vim.api.nvim_create_user_command('Dos', "e ++ff=dos", {})
+vim.api.nvim_create_user_command('Unix', "e ++ff=unix", {})
+
 vim.api.nvim_create_user_command('Wq', 'wq', {})
 vim.api.nvim_create_user_command('WQ', 'wq', {})
 vim.api.nvim_create_user_command('Wa', 'wa', {})
