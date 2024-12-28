@@ -167,6 +167,8 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+vim.keymap.set({"n", "v"}, "L", "$")
+vim.keymap.set({"n", "v"}, "H", "^")
 vim.keymap.set({"t"}, "<Esc>", "<C-\\><C-n>")
 
 -- COMPILE MODE START
