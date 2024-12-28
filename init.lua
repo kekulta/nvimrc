@@ -7,37 +7,8 @@ end
 vim.opt.rtp:prepend(lazypath) require("lazy").setup({ spec = {
         { "catppuccin/nvim", name = "catppuccin", },
         { 'stevearc/oil.nvim', },
-        { "gelguy/wilder.nvim", dependencies = { "nixprime/cpsm" }},
     }, change_detection = { notify = false }
 })
---
--- local wilder = require("wilder")
---
--- wilder.setup({
---     modes = {':', '/', '?'},
--- })
---
--- wilder.set_option('pipeline', {
---   wilder.branch(
---     wilder.python_file_finder_pipeline({
---       file_command = function(ctx, arg)
---         if string.find(arg, '.') ~= nil then
---           return {'fd', '-tf', '-H'}
---         else
---           return {'fd', '-tf'}
---         end
---       end,
---       dir_command = {'fd', '-td'},
---     }),
---     wilder.cmdline_pipeline({
---       fuzzy = 2,
---       set_pcre2_pattern = 1,
---     }),
---     wilder.python_search_pipeline({
---       pattern = 'fuzzy',
---     })
---   ),
--- })
 
 -- WILDEST START
 -- Scratch for my completion plugin.
