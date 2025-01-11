@@ -9,10 +9,15 @@ if not vim.loop.fs_stat(lazypath) then
         })
 end
 
-vim.opt.rtp:prepend(lazypath) require("lazy").setup({ spec = {
+vim.opt.rtp:prepend(lazypath) require("lazy").setup({
+    spec = {
         { "catppuccin/nvim", name = "catppuccin", },
         { 'stevearc/oil.nvim', },
-    }, change_detection = { notify = false }
+    },
+    -- Do not autoreload ui
+    change_detection = { notify = false },
+    -- Disable path reset. Would fail without tressitter otherwise.
+    performance = { rtp = { reset = false } }
 })
 
 -- Setup directory viewer
