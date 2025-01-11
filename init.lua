@@ -36,7 +36,6 @@ vim.keymap.set({"n"}, "<space>c", "q:iComp ")
 
 -- Oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-vim.keymap.set("n", "<space>-", require("oil").toggle_float)
 
 -- Movement
 vim.keymap.set({"n", "v"}, "L", "$")
@@ -45,6 +44,8 @@ vim.keymap.set(
     {"n", "v"}, "<C-d>", "<C-d>zz", { noremap = true, silent = true })
 vim.keymap.set(
     {"n", "v"}, "<C-u>", "<C-u>zz", { noremap = true, silent = true })
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true})
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true})
 
 -- No arrows, please
 vim.keymap.set(
@@ -69,9 +70,23 @@ end)
 -- Add lox filetype for all *.lox files
 vim.filetype.add({ extension = { lox = 'lox', } })
 
+-- Add error format and commentstring for the F#
+vim.cmd("set errorformat+=%min\\ %f:line\\ %l")
+vim.cmd("set errorformat+=%f(%l\\\\,%c):\\ %t%m")
+vim.api.nvim_create_autocmd( { "BufNewFile", "BufRead", },
+    {
+        pattern = "*.fs",
+        callback = function()
+            vim.cmd("set commentstring=(*\\ %s\\ *)")
+        end
+    }
+)
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.undofile = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4

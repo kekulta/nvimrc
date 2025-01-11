@@ -1,52 +1,56 @@
 " Lox syntax file
-" Language: Lox
-" Maintainer: Timmy Jose
 
-:if exists("b:current_syntax")
-:  finish
-:endif
+if exists("b:current_syntax")
+  finish
+endif
 
 " keywords
-:syntax keyword loxKeyword class fun var 
-:syntax keyword loxKeyword for while return
+syn keyword loxKeyword class fun var 
+syn keyword loxKeyword for while return break continue
 
 " booleans
-:syntax keyword loxBoolean true false
+syn keyword loxBoolean true false
 
 " constants
-:syntax keyword loxConstant nil
+syn keyword loxConstant nil
 
 " functions
-:syntax keyword loxFunction print 
+syn keyword loxFunction print 
 
 " operators
-:syntax match loxOperator "\v\*"
-:syntax match loxOperator "\v\+"
-:syntax match loxOperator "\v\-"
-:syntax match loxOperator "\v/"
-:syntax match loxOperator "\v\="
-:syntax match loxOperator "\v!"
+syn match loxOperator "\v\*"
+syn match loxOperator "\v\+"
+syn match loxOperator "\v\-"
+syn match loxOperator "\v/"
+syn match loxOperator "\v\="
+syn match loxOperator "\v!"
 
 " conditionals
-:syntax keyword loxConditional if else and or else
+syn keyword loxConditional if else and or else
 
 " numbers
-:syntax match loxNumber "\v\-?\d*(\.\d+)?"
+syn match loxNumber "\v\-?\d*(\.\d+)?"
 
 " strings
-:syntax region loxString start="\v\"" end="\v\""
+syn match loxSpecialChar "\v\\[tn\\]" contained
+syn region loxString start="\v\"" end="\v\"" contains=loxSpecialChar
 
 " comments
-:syntax match loxComment "\v//.*$"
+syn keyword loxTodo TODO FIXME XXX contained
+syn match loxLineComment "\v//.*$" contains=loxTodo,@Spell
+syn region loxComment start="/\*" end="\*/" contains=loxComment,loxTodo,@Spell
 
-:highlight link loxKeyword Keyword
-:highlight link loxBoolean Boolean
-:highlight link loxConstant Constant
-:highlight link loxFunction Function
-:highlight link loxOperator Operator
-:highlight link loxConditional Conditional
-:highlight link loxNumber Number
-:highlight link loxString String
-:highlight link loxComment Comment
+hi link loxSpecialChar SpecialChar
+hi link loxKeyword Keyword
+hi link loxBoolean Boolean
+hi link loxConstant Constant
+hi link loxFunction Function
+hi link loxOperator Operator
+hi link loxConditional Conditional
+hi link loxNumber Number
+hi link loxString String
+hi link loxLineComment Comment
+hi link loxComment Comment
+hi link loxTodo Todo
 
-:let b:current_syntax = "lox"
+let b:current_syntax = "lox"
