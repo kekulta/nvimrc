@@ -1,5 +1,8 @@
 {
+  "Colorizer": { "branch": "master", "commit": "f7ee18f9e3a5beef6312449bd2776f41cddd147f" },
   "catppuccin": { "branch": "main", "commit": "63685e1562ef53873c9764b483d7ac5c7a608922" },
+  "langmapper.nvim": { "branch": "main", "commit": "57a2fe4d706676aa0386825f27c27a4e3c14e0b0" },
   "lazy.nvim": { "branch": "main", "commit": "460e1cd8f24e364d54543a4b0e83f6f4ec1f65fb" },
+  "mason.nvim": { "branch": "main", "commit": "197f6352c276bbc2d25541dfce00ec50d1a4e88f" },
   "oil.nvim": { "branch": "master", "commit": "9e6fb844fe4cce13d9e3f6a7c970cbc669bb1629" }
 }

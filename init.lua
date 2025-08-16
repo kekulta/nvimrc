@@ -13,12 +13,43 @@ vim.opt.rtp:prepend(lazypath) require("lazy").setup({
     spec = {
         { "catppuccin/nvim", name = "catppuccin", },
         { 'stevearc/oil.nvim', },
+        {
+          'Wansmer/langmapper.nvim',
+          lazy = false,
+          priority = 1, -- High priority is needed if you will use `autoremap()`
+          config = function()
+          end,
+        },
+        {
+            "mason-org/mason.nvim",
+            opts = {}
+        },
     },
     -- Do not autoreload ui
     change_detection = { notify = false },
     -- Disable path reset. Would fail without tressitter otherwise.
     performance = { rtp = { reset = false } }
 })
+
+-- Setup language map for cyrillic, p. 1
+local function escape(str)
+  -- You need to escape these characters to work correctly
+  local escape_chars = [[;,."|\]]
+  return vim.fn.escape(str, escape_chars)
+end
+
+local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
+local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
+local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
+local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
+
+vim.opt.langmap = vim.fn.join({
+    -- | `to` should be first     | `from` should be second
+    escape(ru_shift) .. ';' .. escape(en_shift),
+    escape(ru) .. ';' .. escape(en),
+}, ',')
+
+require('langmapper').setup({})
 
 -- Setup directory viewer
 require("oil").setup({
@@ -41,6 +72,10 @@ vim.keymap.set({"n"}, "<space>c", "q:iComp ")
 
 -- Oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "`", ":cd %:h<CR>:pwd<CR>")
+
+-- Selection
+vim.keymap.set({"v"}, "<", "<gv", { noremap = true, silent = true })
 
 -- Movement
 vim.keymap.set({"n", "v"}, "L", "$")
@@ -51,16 +86,16 @@ vim.keymap.set(
     {"n", "v"}, "<C-u>", "<C-u>zz", { noremap = true, silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true})
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true})
-
--- No arrows, please
-vim.keymap.set(
-    {"n", "i", "v"}, "<Right>", "", { noremap = true, silent = true })
-vim.keymap.set(
-    {"n", "i", "v"}, "<Left>", "", { noremap = true, silent = true })
-vim.keymap.set(
-    {"n", "i", "v"}, "<Up>", "", { noremap = true, silent = true })
-vim.keymap.set(
-    {"n", "i", "v"}, "<Down>", "", { noremap = true, silent = true })
+--
+-- -- No arrows, please
+-- vim.keymap.set(
+--     {"n", "i", "v"}, "<Right>", "", { noremap = true, silent = true })
+-- vim.keymap.set(
+--     {"n", "i", "v"}, "<Left>", "", { noremap = true, silent = true })
+-- vim.keymap.set(
+--     {"n", "i", "v"}, "<Up>", "", { noremap = true, silent = true })
+-- vim.keymap.set(
+--     {"n", "i", "v"}, "<Down>", "", { noremap = true, silent = true })
 
 -- Guys, how do I exit terminal in vim?
 vim.keymap.set({"t"}, "<Esc>", "<C-\\><C-n>")
@@ -98,6 +133,8 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 vim.opt.colorcolumn = "80"
+vim.opt.wildmenu = false
+vim.opt.path = '.,/usr/local/include,/usr/include,/usr/avr/include'
 
 -- Disable linenumbers for built-in terminal
 vim.api.nvim_create_autocmd('TermOpen', {
@@ -156,3 +193,29 @@ vim.api.nvim_create_user_command('Comp',
 )
 
 -- COMPILE MODE END
+
+-- COLORIZE MODE START
+function ansi_colorize()
+  vim.wo.number = false
+  vim.wo.relativenumber = false
+  vim.wo.statuscolumn = ""
+  vim.wo.signcolumn = "no"
+  vim.opt.listchars = { space = " " }
+
+  local buf = vim.api.nvim_get_current_buf()
+
+  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+  while #lines > 0 and vim.trim(lines[#lines]) == "" do
+    lines[#lines] = nil
+  end
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, {})
+
+  vim.api.nvim_chan_send(vim.api.nvim_open_term(buf, {}), table.concat(lines, "\r\n"))
+  vim.keymap.set("n", "q", "<cmd>qa!<cr>", { silent = true, buffer = buf })
+  -- vim.api.nvim_create_autocmd("TextChanged", { buffer = buf, command = "normal! G$" })
+  -- vim.api.nvim_create_autocmd("TermEnter", { buffer = buf, command = "stopinsert" })
+end
+-- COLORIZE MODE END
+
+-- Setup language map for cyrillic, p. 2
+require('langmapper').automapping({ global = true, buffer = true })
