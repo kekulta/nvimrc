@@ -86,8 +86,9 @@ vim.keymap.set(
     {"n", "v"}, "<C-u>", "<C-u>zz", { noremap = true, silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true})
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true})
---
--- -- No arrows, please
+
+---- No arrows, please
+--- We like arrows actually
 -- vim.keymap.set(
 --     {"n", "i", "v"}, "<Right>", "", { noremap = true, silent = true })
 -- vim.keymap.set(
@@ -118,6 +119,16 @@ vim.api.nvim_create_autocmd( { "BufNewFile", "BufRead", },
         pattern = "*.fs",
         callback = function()
             vim.cmd("set commentstring=(*\\ %s\\ *)")
+        end
+    }
+)
+
+-- Add commentstring for scad
+vim.api.nvim_create_autocmd( { "BufNewFile", "BufRead", },
+    {
+        pattern = "*.scad",
+        callback = function()
+            vim.cmd("set commentstring=//\\ %s")
         end
     }
 )

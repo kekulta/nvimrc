@@ -1,8 +1,7 @@
 {
-  "Colorizer": { "branch": "master", "commit": "f7ee18f9e3a5beef6312449bd2776f41cddd147f" },
-  "catppuccin": { "branch": "main", "commit": "63685e1562ef53873c9764b483d7ac5c7a608922" },
+  "catppuccin": { "branch": "main", "commit": "211dc3649f775c5a390e9fae07bf20d985f8dcf2" },
   "langmapper.nvim": { "branch": "main", "commit": "57a2fe4d706676aa0386825f27c27a4e3c14e0b0" },
-  "lazy.nvim": { "branch": "main", "commit": "460e1cd8f24e364d54543a4b0e83f6f4ec1f65fb" },
-  "mason.nvim": { "branch": "main", "commit": "197f6352c276bbc2d25541dfce00ec50d1a4e88f" },
+  "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
+  "mason.nvim": { "branch": "main", "commit": "fc98833b6da5de5a9c5b1446ac541577059555be" },
   "oil.nvim": { "branch": "master", "commit": "9e6fb844fe4cce13d9e3f6a7c970cbc669bb1629" }
 }
